@@ -15,8 +15,8 @@
         }
 
         .container {
-            padding: 60px 20px;
-            max-width: 800px;
+            padding: 80px 20px 60px;
+            max-width: 900px;
             margin: auto;
         }
 
@@ -26,18 +26,22 @@
         }
 
         h2 {
-            font-weight: normal;
-            color: #94a3b8;
-            margin-bottom: 30px;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
         }
 
-        .buttons a {
+        .buttons a,
+        .primary,
+        .secondary {
             display: inline-block;
             margin: 10px;
             padding: 12px 20px;
             border-radius: 8px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
 
         .primary {
@@ -45,9 +49,17 @@
             color: black;
         }
 
+        .primary:hover {
+            opacity: 0.85;
+        }
+
         .secondary {
             border: 1px solid #38bdf8;
             color: #38bdf8;
+        }
+
+        .secondary:hover {
+            background: rgba(56, 189, 248, 0.1);
         }
 
         .metrics {
