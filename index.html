@@ -20,30 +20,7 @@
       padding: 0 20px;
     }
 
-    .container {
-      padding: 80px 0 60px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #e2e8f0;
-    }
-
-    h2 {
-      font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 20px;
-      font-size: 1.6rem;
-    }
-
-    p {
-      color: #cbd5f5;
-    }
-
-    /* Readability: cap sentence line length to ~700px */
+    /* Tighten readable text width (designer feedback) */
     .prose {
       max-width: 700px;
       margin-left: auto;
@@ -55,13 +32,38 @@
       margin-top: 14px;
     }
 
+    .container {
+      padding: 80px 0 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+      color: #e2e8f0;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      color: #cbd5f5;
+    }
+
     .buttons a,
     .primary,
     .secondary {
       display: inline-block;
       margin: 10px;
       padding: 12px 20px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: 600;
       transition: all 0.2s ease;
@@ -130,14 +132,12 @@
       margin-top: 24px;
     }
 
-    /* 2 columns on medium screens */
     @media (min-width: 700px) {
       .skills-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    /* 3 columns when you have 6 items on wider screens (3x2) */
     @media (min-width: 980px) {
       .skills-grid.six {
         grid-template-columns: 1fr 1fr 1fr;
@@ -165,6 +165,151 @@
       max-width: none;
       line-height: 1.5;
     }
+
+    /* --- MNTN-inspired patterns (adapted) --- */
+
+    .hero {
+      padding: 34px 0 10px;
+    }
+
+    .kicker {
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .hero-subtitle {
+      margin: 12px auto 0;
+      color: #cbd5f5;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+    }
+
+    /* Social proof strip (logo strip vibe, text-only) */
+    .logo-strip {
+      margin-top: 26px;
+      padding: 14px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .logo-strip-title {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin: 0 0 10px;
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (min-width: 700px) {
+      .logos {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+    }
+
+    .logo-pill {
+      padding: 10px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      background: rgba(255, 255, 255, 0.015);
+      color: #cbd5f5;
+      font-size: 0.9rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Stats band */
+    .stats-band {
+      margin-top: 34px;
+      padding: 18px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.10), rgba(255, 255, 255, 0.02));
+    }
+
+    /* Steps (How it works) */
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 820px) {
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .step-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .step-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(99, 102, 241, 0.18);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #e2e8f0;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .step-title {
+      margin: 0;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+    }
+
+    .step-text {
+      margin: 10px 0 0;
+      color: #cbd5f5;
+      line-height: 1.6;
+      max-width: none;
+    }
+
+    /* CTA band */
+    .cta-band {
+      margin-top: 26px;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.14), rgba(255, 255, 255, 0.02));
+      text-align: center;
+    }
+
+    .cta-band p {
+      margin: 0 auto 16px;
+      max-width: 700px;
+      line-height: 1.7;
+    }
   </style>
 </head>
 
@@ -185,50 +330,67 @@
           <a href="/resume.pdf" style="color:#6366f1; text-decoration:none; font-weight:600;">Resume</a>
           <a href="https://www.linkedin.com/in/averymhunt/" target="_blank" rel="noopener"
             style="color:#6366f1; text-decoration:none; font-weight:600;">LinkedIn</a>
-          <a href="mailto:avery.rine@gmail.com"
-            style="color:#6366f1; text-decoration:none; font-weight:600;">Email</a>
+          <a href="mailto:avery.rine@gmail.com" style="color:#6366f1; text-decoration:none; font-weight:600;">Email</a>
         </div>
       </div>
     </div>
 
-    <!-- Hero -->
     <div class="container">
-      <h1>Avery Rine</h1>
-      <h2>Engineering Manager | Quality &amp; Release Governance</h2>
 
-      <p style="margin-top:-10px; color:#94a3b8;">
-        Indianapolis, IN · Open to remote/hybrid · Available for interviews
-      </p>
+      <!-- Hero (MNTN-inspired) -->
+      <div class="hero">
+        <span class="kicker">Engineering Leadership · Quality · Release Governance</span>
 
-      <div class="prose">
-        <p style="margin-top:16px;">
-          Engineering Manager with 9+ years in quality engineering and release governance.
+        <h1>Avery Rine</h1>
+        <h2>Engineering Manager</h2>
+
+        <p style="margin-top:-6px; color:#94a3b8;">
+          Indianapolis, IN · Open to remote/hybrid · Available for interviews
+        </p>
+
+        <p class="hero-subtitle">
           I build calm, high-performing teams and strengthen SDLC signals to ship SOX-compliant releases faster —
           up to 70% cycle-time reduction with 90%+ automation stability.
         </p>
-      </div>
 
-      <div class="buttons">
-        <a href="/resume.pdf" class="primary">Download Resume</a>
-        <a href="mailto:avery.rine@gmail.com" class="secondary">Get In Touch</a>
-      </div>
+        <div class="hero-actions">
+          <a href="/resume.pdf" class="primary">Download Resume</a>
+          <a href="mailto:avery.rine@gmail.com" class="secondary">Email me</a>
+        </div>
 
-      <div class="metrics">
-        <div class="metric">
-          <h3>70%</h3>
-          <p style="color:#cbd5f5;">Release timelines reduced</p>
+        <!-- Social proof strip (logo strip vibe) -->
+        <div class="logo-strip">
+          <p class="logo-strip-title">Trusted for calm leadership in regulated, high-signal delivery environments</p>
+          <div class="logos">
+            <div class="logo-pill">SOX Releases</div>
+            <div class="logo-pill">Release Governance</div>
+            <div class="logo-pill">Automation Strategy</div>
+            <div class="logo-pill">CI/CD Quality</div>
+            <div class="logo-pill">AI Workflows</div>
+            <div class="logo-pill">DevEx</div>
+          </div>
         </div>
-        <div class="metric">
-          <h3>90%+</h3>
-          <p style="color:#cbd5f5;">Automation stability achieved</p>
-        </div>
-        <div class="metric">
-          <h3>SOX</h3>
-          <p style="color:#cbd5f5;">Compliant release governance</p>
-        </div>
-        <div class="metric">
-          <h3>9+</h3>
-          <p style="color:#cbd5f5;">Years engineering leadership</p>
+
+        <!-- Stats band -->
+        <div class="stats-band">
+          <div class="metrics" style="margin-top:0;">
+            <div class="metric">
+              <h3>70%</h3>
+              <p style="color:#cbd5f5;">Release timelines reduced</p>
+            </div>
+            <div class="metric">
+              <h3>90%+</h3>
+              <p style="color:#cbd5f5;">Automation stability achieved</p>
+            </div>
+            <div class="metric">
+              <h3>SOX</h3>
+              <p style="color:#cbd5f5;">Compliant release governance</p>
+            </div>
+            <div class="metric">
+              <h3>9+</h3>
+              <p style="color:#cbd5f5;">Years engineering leadership</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -236,7 +398,6 @@
       <div class="section">
         <h2 style="text-align:center;">Core Skills</h2>
 
-        <!-- Keep 6 items = 3x2 on wide screens -->
         <div class="skills-grid six">
           <div class="skill-card">
             <h3>Leadership &amp; Strategy</h3>
@@ -266,6 +427,53 @@
           <div class="skill-card">
             <h3>Risk &amp; Compliance</h3>
             <p>SOX release governance, change management, audit-ready delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How I work (MNTN-style steps) -->
+      <div class="section">
+        <h2 style="text-align:center;">How I work</h2>
+
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">1</span>
+              <h3 class="step-title">Clarify the outcome</h3>
+            </div>
+            <p class="step-text">
+              Align stakeholders on the goal, constraints, and risk posture. Define what “good” looks like and how we’ll measure it.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">2</span>
+              <h3 class="step-title">Strengthen SDLC signals</h3>
+            </div>
+            <p class="step-text">
+              Tighten test strategy, automation reliability, and CI/CD gates so teams get fast feedback with fewer false alarms.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">3</span>
+              <h3 class="step-title">Ship with governance</h3>
+            </div>
+            <p class="step-text">
+              Build an audit-ready release rhythm (SOX-safe) that still supports delivery velocity and predictable launches.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">4</span>
+              <h3 class="step-title">Operate and improve</h3>
+            </div>
+            <p class="step-text">
+              Use metrics + retros to remove friction, improve developer experience, and keep quality systems durable as the org scales.
+            </p>
           </div>
         </div>
       </div>
@@ -315,6 +523,16 @@
             </p>
           </div>
         </div>
+      </div>
+
+      <!-- CTA band (MNTN-style) -->
+      <div class="cta-band">
+        <h2 style="margin:0 0 10px;">Want the full story?</h2>
+        <p>
+          Download my resume or email me. I’m happy to share examples, metrics, and what I’m looking for next.
+        </p>
+        <a href="/resume.pdf" class="primary">Download Resume</a>
+        <a href="mailto:avery.rine@gmail.com" class="secondary">Email me</a>
       </div>
 
       <!-- Experience -->
