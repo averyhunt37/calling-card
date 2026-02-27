@@ -8,19 +8,36 @@
 
   <style>
     :root {
+      /* Brand (matches new logo direction) */
       --brand-charcoal: #2B2F33;
       --brand-blue: #3A6EA5;
 
+      /* Core UI */
       --bg: #0B1220;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-2: rgba(255, 255, 255, 0.06);
       --border: rgba(148, 163, 184, 0.16);
 
+      /* Text */
       --text: #EAF0F8;
       --text-muted: rgba(234, 240, 248, 0.72);
       --text-soft: rgba(234, 240, 248, 0.86);
+      --text-faint: rgba(234, 240, 248, 0.55);
 
+      /* Links / accents */
       --link: var(--brand-blue);
       --link-hover: #2F5F92;
+
+      /* Buttons */
+      --btn-primary: var(--brand-blue);
+      --btn-primary-hover: #2F5F92;
+      --btn-secondary-bg: rgba(255, 255, 255, 0.02);
+      --btn-secondary-border: rgba(148, 163, 184, 0.28);
+      --btn-secondary-hover: rgba(58, 110, 165, 0.10);
+
+      /* Component accents */
+      --step-bg: rgba(58, 110, 165, 0.18);
+      --step-border: rgba(58, 110, 165, 0.35);
     }
 
     body {
@@ -37,6 +54,7 @@
       padding: 0 20px;
     }
 
+    /* Tighten readable text width (designer feedback) */
     .prose {
       max-width: 700px;
       margin-left: auto;
@@ -49,7 +67,7 @@
     }
 
     .container {
-      padding: 70px 0 60px;
+      padding: 80px 0 60px;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -81,6 +99,18 @@
       color: var(--link-hover);
     }
 
+    /* Utility text helpers (replaces inline color styles) */
+    .t-text { color: var(--text); }
+    .t-muted { color: var(--text-muted); }
+    .t-soft { color: var(--text-soft); }
+    .t-faint { color: var(--text-faint); }
+    .t-center { text-align: center; }
+    .mt0 { margin-top: 0; }
+    .mt12 { margin-top: 12px; }
+    .mt18 { margin-top: 18px; }
+    .tight { margin-top: -6px; }
+
+    .buttons a,
     .primary,
     .secondary {
       display: inline-block;
@@ -93,22 +123,24 @@
     }
 
     .primary {
-      background: var(--brand-blue);
+      background: var(--btn-primary);
       color: white;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
     }
 
     .primary:hover {
-      background: #2F5F92;
+      background: var(--btn-primary-hover);
     }
 
     .secondary {
-      border: 1px solid rgba(148, 163, 184, 0.28);
+      border: 1px solid var(--btn-secondary-border);
       color: var(--text-soft);
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--btn-secondary-bg);
     }
 
     .secondary:hover {
-      background: rgba(58, 110, 165, 0.10);
+      background: var(--btn-secondary-hover);
+      border-color: rgba(58, 110, 165, 0.30);
     }
 
     .metrics {
@@ -134,22 +166,23 @@
       border-radius: 12px;
       padding: 18px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .card-like:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.34);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
       border-color: rgba(58, 110, 165, 0.28);
     }
 
     .section {
       margin-top: 70px;
       padding-top: 40px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
       text-align: left;
     }
 
+    /* Skills layout: clean, intentional grid */
     .skills-grid {
       display: grid;
       gap: 16px;
@@ -169,30 +202,88 @@
     }
 
     .skill-card {
+      text-align: left;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      transition: border-color 0.2s ease;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(58, 110, 165, 0.28);
     }
 
     .skill-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
       color: var(--text);
     }
 
     .skill-card p {
+      margin: 0;
       color: var(--text-muted);
+      max-width: none;
+      line-height: 1.5;
     }
+
+    /* --- Sticky Nav (moved out of inline styles) --- */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 18, 32, 0.78);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      z-index: 10;
+    }
+
+    .sticky-nav-inner {
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-title {
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--brand-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--link-hover);
+    }
+
+    /* --- MNTN-inspired patterns (adapted) --- */
 
     .hero {
       padding: 34px 0 10px;
     }
 
     .kicker {
+      display: inline-block;
       font-size: 0.9rem;
       color: var(--text-muted);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(148, 163, 184, 0.20);
       padding: 8px 12px;
       border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .hero-subtitle {
@@ -202,44 +293,140 @@
       max-width: 700px;
     }
 
+    .hero-actions {
+      margin-top: 18px;
+    }
+
+    /* Social proof strip */
     .logo-strip {
       margin-top: 26px;
-      padding: 14px;
-      border: 1px solid var(--border);
+      padding: 14px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
       border-radius: 12px;
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .logo-strip-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0 0 10px;
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (min-width: 700px) {
+      .logos {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
     }
 
     .logo-pill {
-      padding: 10px;
+      padding: 10px 10px;
       border-radius: 999px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: rgba(255, 255, 255, 0.02);
       color: var(--text-soft);
+      font-size: 0.9rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
+    /* Stats band */
     .stats-band {
       margin-top: 34px;
-      padding: 18px;
+      padding: 18px 10px;
       border-radius: 14px;
-      border: 1px solid var(--border);
-      background: linear-gradient(
-        180deg,
-        rgba(58, 110, 165, 0.18),
-        rgba(255, 255, 255, 0.02)
-      );
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: linear-gradient(180deg, rgba(58, 110, 165, 0.18), rgba(255, 255, 255, 0.02));
     }
 
+    /* Steps */
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 820px) {
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      transition: border-color 0.2s ease;
+    }
+
+    .step-card:hover {
+      border-color: rgba(58, 110, 165, 0.28);
+    }
+
+    .step-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--step-bg);
+      border: 1px solid var(--step-border);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .step-title {
+      margin: 0;
+      color: var(--text);
+      font-size: 1.05rem;
+    }
+
+    .step-text {
+      margin: 10px 0 0;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: none;
+    }
+
+    /* CTA band */
     .cta-band {
       margin-top: 26px;
       padding: 18px;
       border-radius: 14px;
       border: 1px solid rgba(58, 110, 165, 0.28);
-      background: linear-gradient(
-        180deg,
-        rgba(58, 110, 165, 0.22),
-        rgba(255, 255, 255, 0.02)
-      );
+      background: linear-gradient(180deg, rgba(58, 110, 165, 0.22), rgba(255, 255, 255, 0.02));
       text-align: center;
+    }
+
+    .cta-band p {
+      margin: 0 auto 16px;
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    /* Footer (moved out of inline styles) */
+    .site-footer {
+      margin-top: 38px;
+      padding: 18px 0;
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -248,18 +435,12 @@
   <div class="page">
 
     <!-- Sticky Nav -->
-    <div style="
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(11,18,32,0.8);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;">
-      <div style="padding: 16px 0; display:flex; justify-content:space-between; align-items:center;">
-        <div style="font-weight:700;">Avery Rine</div>
-        <div style="display:flex; gap:14px;">
+    <div class="sticky-nav">
+      <div class="sticky-nav-inner">
+        <div class="nav-title">Avery Rine</div>
+        <div class="nav-links">
           <a href="/resume.pdf">Resume</a>
-          <a href="https://www.linkedin.com/in/averymrine/" target="_blank">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/averymrine" target="_blank" rel="noopener">LinkedIn</a>
           <a href="mailto:averyrine37@gmail.com">Email</a>
         </div>
       </div>
@@ -267,39 +448,334 @@
 
     <div class="container">
 
+      <!-- Hero -->
       <div class="hero">
         <span class="kicker">Engineering Leadership · Quality · Release Governance</span>
 
         <h1>Avery Rine</h1>
         <h2>Engineering Manager</h2>
 
-        <p>Indianapolis, IN · Open to remote/hybrid</p>
-
-        <p class="hero-subtitle">
-          I build calm, high-performing teams and strengthen SDLC signals to ship SOX-compliant releases faster.
+        <p class="t-muted tight">
+          Indianapolis, IN · Open to remote/hybrid · Available for interviews
         </p>
 
+        <p class="hero-subtitle">
+          I build calm, high-performing teams and strengthen SDLC signals to ship SOX-compliant releases faster —
+          up to 70% cycle-time reduction with 90%+ automation stability.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/resume.pdf" class="primary">Download Resume</a>
+          <a href="mailto:averyrine37@gmail.com" class="secondary">Email me</a>
+        </div>
+
+        <!-- Social proof strip -->
+        <div class="logo-strip">
+          <p class="logo-strip-title">Trusted for calm leadership in regulated, high-signal delivery environments</p>
+          <div class="logos">
+            <div class="logo-pill">SOX Releases</div>
+            <div class="logo-pill">Release Governance</div>
+            <div class="logo-pill">Automation Strategy</div>
+            <div class="logo-pill">CI/CD Quality</div>
+            <div class="logo-pill">AI Workflows</div>
+            <div class="logo-pill">DevEx</div>
+          </div>
+        </div>
+
+        <!-- Stats band -->
+        <div class="stats-band">
+          <div class="metrics" style="margin-top:0;">
+            <div class="metric">
+              <h3>70%</h3>
+              <p class="t-muted">Release timelines reduced</p>
+            </div>
+            <div class="metric">
+              <h3>90%+</h3>
+              <p class="t-muted">Automation stability achieved</p>
+            </div>
+            <div class="metric">
+              <h3>SOX</h3>
+              <p class="t-muted">Compliant release governance</p>
+            </div>
+            <div class="metric">
+              <h3>9+</h3>
+              <p class="t-muted">Years engineering leadership</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Skills -->
+      <div class="section">
+        <h2 class="t-center">Core Skills</h2>
+
+        <div class="skills-grid six">
+          <div class="skill-card">
+            <h3>Leadership &amp; Strategy</h3>
+            <p>Team Leadership, Agile Delivery, Release Governance, Stakeholder Alignment</p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Automation &amp; Quality</h3>
+            <p>Test Automation, QA Strategy, CI/CD Integration, Regression Optimization</p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Tools &amp; Platforms</h3>
+            <p>Azure DevOps, Jenkins, GitHub, Postman, Selenium</p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Data &amp; Reporting</h3>
+            <p>SQL, Power BI, Metrics &amp; Reporting, Quality Dashboards</p>
+          </div>
+
+          <div class="skill-card">
+            <h3>AI &amp; Process Improvement</h3>
+            <p>AI-assisted workflows, Process Optimization, SDLC Efficiency</p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Risk &amp; Compliance</h3>
+            <p>SOX release governance, change management, audit-ready delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How I work -->
+      <div class="section">
+        <h2 class="t-center">How I work</h2>
+
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">1</span>
+              <h3 class="step-title">Clarify the outcome</h3>
+            </div>
+            <p class="step-text">
+              Align stakeholders on the goal, constraints, and risk posture. Define what “good” looks like and how we’ll measure it.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">2</span>
+              <h3 class="step-title">Strengthen SDLC signals</h3>
+            </div>
+            <p class="step-text">
+              Tighten test strategy, automation reliability, and CI/CD gates so teams get fast feedback with fewer false alarms.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">3</span>
+              <h3 class="step-title">Ship with governance</h3>
+            </div>
+            <p class="step-text">
+              Build an audit-ready release rhythm (SOX-safe) that still supports delivery velocity and predictable launches.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-head">
+              <span class="step-num">4</span>
+              <h3 class="step-title">Operate and improve</h3>
+            </div>
+            <p class="step-text">
+              Use metrics + retros to remove friction, improve developer experience, and keep quality systems durable as the org scales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What I'm known for -->
+      <div class="section">
+        <h2 class="t-center">What I’m known for</h2>
+
+        <div class="prose">
+          <p class="t-text mt18">
+            I’m an Engineering Manager with 9+ years leading distributed teams, modernizing automation architecture,
+            and governing SOX-compliant release cycles in fintech and enterprise environments.
+          </p>
+
+          <p class="t-text mt12">
+            I’m known for reducing release timelines by up to 70%, increasing automation stability 90%+, and aligning
+            quality strategy with DevOps velocity and enterprise risk management.
+          </p>
+
+          <p class="t-muted mt12">
+            Executive-level communicator. Empathetic leader. Calm, decisive operator. Strategic systems thinker. Risk-aware mindset.
+          </p>
+        </div>
+      </div>
+
+      <!-- Featured Impact -->
+      <div class="section">
+        <h2 class="t-center">Featured Impact</h2>
+
+        <div class="card-like" style="margin-top:24px;">
+          <h3 class="mt0 t-text">AI-Powered PR Agent Implementation</h3>
+
+          <div class="prose">
+            <p class="t-text mt12">
+              Identified an opportunity to improve developer productivity by introducing an AI-powered PR Agent
+              after evaluating a successful implementation in another business unit. Proactively secured buy-in,
+              authored a proposal, and led implementation without requiring net-new engineering investment.
+            </p>
+
+            <p class="t-text mt12">
+              Delivered measurable impact within weeks, improving pull request review turnaround time by ~20%
+              and accelerating feedback loops across engineering teams.
+            </p>
+
+            <p class="t-muted mt12">
+              Focus: AI adoption · Developer experience · Process optimization · Fast execution
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA band -->
+      <div class="cta-band">
+        <h2 class="mt0">Want the full story?</h2>
+        <p>
+          Download my resume or email me. I’m happy to share examples, metrics, and what I’m looking for next.
+        </p>
         <a href="/resume.pdf" class="primary">Download Resume</a>
         <a href="mailto:averyrine37@gmail.com" class="secondary">Email me</a>
-
       </div>
 
-      <div class="cta-band">
-        <h2>Let’s connect</h2>
-        <a href="mailto:averyrine37@gmail.com" class="primary">Email me</a>
+      <!-- Experience -->
+      <div class="section">
+        <h2 class="t-center">Experience</h2>
+
+        <div style="display:flex; flex-direction:column; gap:18px; margin-top:28px;">
+          <div class="card-like">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
+              <div style="font-weight:700; font-size:1.05rem;" class="t-text">Engineering Manager — EverBright</div>
+              <div class="t-muted">Mar 2023 – Present</div>
+            </div>
+            <div class="prose">
+              <p class="t-text" style="margin:12px 0 0;">
+                Lead enterprise strategy and SOX-compliant releases, ensuring engineering aligns with business risk and deployment velocity.
+                Modernize automation architecture, optimize the SDLC using AI-driven analysis, and integrate quality practices into CI/CD
+                to support a rolling release model. Provide executive visibility into release health while mentoring distributed engineers
+                and driving cross-functional collaboration across Engineering, Product, and DevOps.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-like">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
+              <div style="font-weight:700; font-size:1.05rem;" class="t-text">QA Engineering Manager &amp; Release Management — Bill360</div>
+              <div class="t-muted">Apr 2022 – Mar 2023</div>
+            </div>
+            <div class="prose">
+              <p class="t-text" style="margin:12px 0 0;">
+                Responsible for all software testing across the development and release lifecycle. Set QA strategy and direction by improving
+                testing processes, leading automated and manual test development, and coordinating release execution through multiple environments.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-like">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
+              <div style="font-weight:700; font-size:1.05rem;" class="t-text">Lead Automation Architect / Sr. Software QA Engineer — RCI &amp; Wyndham Destinations</div>
+              <div class="t-muted">Sep 2019 – Apr 2022</div>
+            </div>
+            <div class="prose">
+              <p class="t-text" style="margin:12px 0 0;">
+                Analyzed an existing automation framework built by an offshore consulting company and delivered a strategic plan for continuous
+                improvement, re-architecture, and maintenance. Coordinated offshore and onshore teams to implement and execute the plan after
+                promotion into technical leadership.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:22px;">
+          <a href="/resume.pdf" class="secondary">See full resume</a>
+        </div>
       </div>
 
-      <div style="margin-top:40px; color:var(--text-muted); font-size:0.9rem;">
-        © <span id="year"></span> Avery Rine
+      <!-- Recommendations -->
+      <div class="section">
+        <h2 class="t-center">What others say</h2>
+
+        <div style="display:flex; flex-direction:column; gap:18px; margin-top:28px;">
+          <div class="card-like">
+            <div class="prose">
+              <p class="t-text">
+                “Avery’s leadership increased velocity, quality, and team morale. Stakeholders saw features shipped earlier with fewer issues,
+                and her push toward LLM-powered tooling improved engineering productivity across the team.”
+              </p>
+            </div>
+            <p class="t-muted" style="margin-top:10px;">— Head of AI Research &amp; Applications</p>
+          </div>
+
+          <div class="card-like">
+            <div class="prose">
+              <p class="t-text">
+                “Avery is an exceptional engineering manager — a forward thinker who solves problems quickly and creates an environment where her team can truly thrive.”
+              </p>
+            </div>
+            <p class="t-muted" style="margin-top:10px;">— Software Engineer</p>
+          </div>
+
+          <div class="card-like">
+            <div class="prose">
+              <p class="t-text">
+                “She brought stability to our release cycles, reduced downtime, and improved delivery predictability across the organization.
+                Her leadership had a lasting impact on both systems and people.”
+              </p>
+            </div>
+            <p class="t-muted" style="margin-top:10px;">— CTO</p>
+          </div>
+
+          <div class="card-like">
+            <div class="prose">
+              <p class="t-text">
+                “Avery creates a culture of trust, ownership, and continuous improvement. She balances technical depth with strategic thinking
+                and consistently helps engineers grow and perform at a high level.”
+              </p>
+            </div>
+            <p class="t-muted" style="margin-top:10px;">— Direct Report</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="section">
+        <div class="card-like">
+          <h2 class="t-center" style="margin:0 0 12px;">Contact</h2>
+
+          <div class="prose">
+            <p class="t-text" style="margin:0 0 18px; text-align:center; line-height:1.6;">
+              Recruiter or hiring manager? The fastest way to reach me is email. I’m happy to share availability and next steps.
+            </p>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+            <a href="mailto:averyrine37@gmail.com" class="primary">Email me</a>
+            <a href="https://www.linkedin.com/in/averymrine" target="_blank" rel="noopener" class="secondary">Message on LinkedIn</a>
+            <a href="/resume.pdf" class="secondary">Download resume</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="site-footer">
+        © <span id="year"></span> Avery Rine · Built for recruiters · Hosted on Vercel
       </div>
 
       <script>
         document.getElementById("year").textContent = new Date().getFullYear();
       </script>
 
-    </div>
+    </div> <!-- /container -->
 
-  </div>
+  </div> <!-- /page -->
 </body>
 
 </html>
