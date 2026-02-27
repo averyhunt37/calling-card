@@ -16,7 +16,7 @@
 
         .container {
             padding: 80px 20px 60px;
-            max-width: 900px;
+            max-width: 760px;
             margin: auto;
         }
 
@@ -83,12 +83,38 @@
             font-size: 1.8rem;
             color: #6366f1;
         }
+
+        .card-like {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .section {
+            margin-top: 70px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+        }
     </style>
 </head>
 
 <body>
-    <div
-        style="padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto;">
+    <div style="
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(15,23,42,0.7);
+      border-bottom: 1px solid rgba(148,163,184,0.15);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      z-index: 10;
+    ">
         <div style="font-weight: 700; color:#e2e8f0;">Avery Rine</div>
         <div style="display: flex; gap: 14px; flex-wrap: wrap;">
             <a href="/resume.pdf" style="color:#6366f1; text-decoration:none; font-weight:600;">Resume</a>
@@ -166,8 +192,8 @@
 
             </div>
 
-            <div style="margin-top:70px; text-align:left;">
-                <div style="margin-top:70px; text-align:left;">
+            <div class="section" style="text-align:left;">
+                <div class="section" style="text-align:left;">
                     <h2 style="text-align:center;">What I’m known for</h2>
 
                     <p style="margin-top:18px; color:#e2e8f0; line-height:1.6;">
@@ -188,7 +214,7 @@
                     </p>
                 </div>
 
-                <div style="margin-top:70px; text-align:left;">
+                <div class="section" style="text-align:left;">
                     <h2 style="text-align:center;">Featured Impact</h2>
 
                     <div
@@ -222,10 +248,10 @@
 
                 <div style="display:flex; flex-direction:column; gap:18px; margin-top:28px;">
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
-                            <div style="font-weight:700; font-size:1.05rem; color:#e2e8f0;">Engineering Manager — EverBright</div>
+                            <div style="font-weight:700; font-size:1.05rem; color:#e2e8f0;">Engineering Manager —
+                                EverBright</div>
                             <div style="color:#94a3b8;">Mar 2023 – Present</div>
                         </div>
                         <p style="margin:12px 0 0; color:#e2e8f0;">
@@ -239,10 +265,10 @@
                         </p>
                     </div>
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
-                            <div style="font-weight:700; font-size:1.05rem; color:#e2e8f0;">QA Engineering Manager & Release Management
+                            <div style="font-weight:700; font-size:1.05rem; color:#e2e8f0;">QA Engineering Manager &
+                                Release Management
                                 — Bill360</div>
                             <div style="color:#94a3b8;">Apr 2022 – Mar 2023</div>
                         </div>
@@ -254,10 +280,10 @@
                         </p>
                     </div>
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
-                            <div style="font-weight:700; font-size:1.05rem; color:#e2e8f0;">Lead Automation Architect / Sr. Software QA
+                            <div style="font-weight:700; font-size:1.05rem; color:#e2e8f0;">Lead Automation Architect /
+                                Sr. Software QA
                                 Engineer — RCI & Wyndham Destinations</div>
                             <div style="color:#94a3b8;">Sep 2019 – Apr 2022</div>
                         </div>
@@ -277,13 +303,12 @@
                 </div>
             </div>
 
-            <div style="margin-top:70px; text-align:left;">
+            <div class="section" style="text-align:left;">
                 <h2 style="text-align:center;">What others say</h2>
 
                 <div style="display:flex; flex-direction:column; gap:18px; margin-top:28px;">
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <p style="color:#e2e8f0;">
                             “Avery’s leadership increased velocity, quality, and team morale. Stakeholders saw features
                             shipped earlier with fewer issues, and her push toward LLM-powered tooling improved
@@ -294,8 +319,7 @@
                         </p>
                     </div>
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <p style="color:#e2e8f0;">
                             “Avery is an exceptional engineering manager — a forward thinker who solves problems quickly
                             and creates an environment where her team can truly thrive.”
@@ -305,8 +329,7 @@
                         </p>
                     </div>
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <p style="color:#e2e8f0;">
                             “She brought stability to our release cycles, reduced downtime, and improved delivery
                             predictability across the organization. Her leadership had a lasting impact on both systems
@@ -317,8 +340,7 @@
                         </p>
                     </div>
 
-                    <div
-                        style="background:rgba(255,255,255,0.04); border:1px solid #334155; border-radius:12px; padding:18px;">
+                    <div style="class=" card-like"">
                         <p style="color:#e2e8f0;">
                             “Avery creates a culture of trust, ownership, and continuous improvement. She balances
                             technical depth with strategic thinking and consistently helps engineers grow and perform at
