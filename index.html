@@ -148,90 +148,92 @@
     .tight { margin-top: -6px; }
 
     .primary,
-    /* Premium button shine (subtle) */
-    .primary {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    
-    .primary::after {
-      content: "";
-      position: absolute;
-      top: -40%;
-      left: -60%;
-      width: 60%;
-      height: 200%;
-      background: linear-gradient(
-        110deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.22) 18%,
-        rgba(255, 255, 255, 0.10) 32%,
-        transparent 52%
-      );
-      transform: translateX(0) skewX(-18deg);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    .primary:hover::after,
-    .primary:focus-visible::after {
-      opacity: 1;
-      animation: btnShine 650ms ease-out forwards;
-    }
-    
-    @keyframes btnShine {
-      0%   { transform: translateX(0) skewX(-18deg); }
-      100% { transform: translateX(260%) skewX(-18deg); }
-    }
-    
-    /* Keep button text above shine */
-    .primary span,
-    .primary {
-      z-index: 1;
-    }
-    
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .primary:hover::after,
-      .primary:focus-visible::after {
-        animation: none;
-      }
-    }
-    .secondary {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-      will-change: transform;
-    }
+    /* Buttons (base) */
+.primary,
+.secondary {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
+}
 
-    .primary {
-      background: var(--btn-primary);
-      color: white;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
-    }
+/* Primary button */
+.primary {
+  background: var(--btn-primary);
+  color: white;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
 
-    .primary:hover {
-      background: var(--btn-primary-hover);
-      transform: translateY(-1px);
-    }
+  /* Premium button shine (subtle) */
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
 
-    .secondary {
-      border: 1px solid var(--btn-secondary-border);
-      color: var(--text-soft);
-      background: var(--btn-secondary-bg);
-    }
+.primary:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
 
-    .secondary:hover {
-      background: var(--btn-secondary-hover);
-      border-color: rgba(58, 110, 165, 0.30);
-      transform: translateY(-1px);
-    }
+.primary::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 18%,
+    rgba(255, 255, 255, 0.10) 32%,
+    transparent 52%
+  );
+  transform: translateX(0) skewX(-18deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.primary:hover::after,
+.primary:focus-visible::after {
+  opacity: 1;
+  animation: btnShine 650ms ease-out forwards;
+}
+
+@keyframes btnShine {
+  0% { transform: translateX(0) skewX(-18deg); }
+  100% { transform: translateX(260%) skewX(-18deg); }
+}
+
+/* Keep button text above shine */
+.primary {
+  z-index: 1;
+}
+
+/* Secondary button */
+.secondary {
+  border: 1px solid var(--btn-secondary-border);
+  color: var(--text-soft);
+  background: var(--btn-secondary-bg);
+}
+
+.secondary:hover {
+  background: var(--btn-secondary-hover);
+  border-color: rgba(58, 110, 165, 0.30);
+  transform: translateY(-1px);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover::after,
+  .primary:focus-visible::after {
+    animation: none;
+  }
+}
 
     .metrics {
       display: flex;
