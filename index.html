@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Avery Rine | Engineering Manager</title>
 
+  <!-- Calm scroll animations (AOS) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
   <style>
     :root {
       /* Brand (matches new logo direction) */
@@ -15,7 +18,6 @@
       /* Core UI */
       --bg: #0B1220;
       --surface: rgba(255, 255, 255, 0.04);
-      --surface-2: rgba(255, 255, 255, 0.06);
       --border: rgba(148, 163, 184, 0.16);
 
       /* Text */
@@ -40,12 +42,47 @@
       --step-border: rgba(58, 110, 165, 0.35);
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       background: var(--bg);
       color: var(--text);
       text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Calm animated background (subtle, premium) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(700px 500px at 15% 20%, rgba(58, 110, 165, 0.14), transparent 60%),
+        radial-gradient(700px 500px at 85% 30%, rgba(58, 110, 165, 0.10), transparent 60%),
+        radial-gradient(900px 650px at 50% 85%, rgba(255, 255, 255, 0.05), transparent 60%);
+      filter: blur(18px);
+      opacity: 0.85;
+      transform: translate3d(0, 0, 0);
+      animation: floatGlow 18s ease-in-out infinite;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-18px, 10px, 0) scale(1.02); }
+      100% { transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    /* Reduced motion: disable background + animations */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      body::before { animation: none; }
     }
 
     .page {
@@ -99,7 +136,7 @@
       color: var(--link-hover);
     }
 
-    /* Utility text helpers (replaces inline color styles) */
+    /* Utility text helpers */
     .t-text { color: var(--text); }
     .t-muted { color: var(--text-muted); }
     .t-soft { color: var(--text-soft); }
@@ -110,8 +147,58 @@
     .mt18 { margin-top: 18px; }
     .tight { margin-top: -6px; }
 
-    .buttons a,
     .primary,
+    /* Premium button shine (subtle) */
+    .primary {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    
+    .primary::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: -60%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.22) 18%,
+        rgba(255, 255, 255, 0.10) 32%,
+        transparent 52%
+      );
+      transform: translateX(0) skewX(-18deg);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .primary:hover::after,
+    .primary:focus-visible::after {
+      opacity: 1;
+      animation: btnShine 650ms ease-out forwards;
+    }
+    
+    @keyframes btnShine {
+      0%   { transform: translateX(0) skewX(-18deg); }
+      100% { transform: translateX(260%) skewX(-18deg); }
+    }
+    
+    /* Keep button text above shine */
+    .primary span,
+    .primary {
+      z-index: 1;
+    }
+    
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .primary:hover::after,
+      .primary:focus-visible::after {
+        animation: none;
+      }
+    }
     .secondary {
       display: inline-block;
       margin: 10px;
@@ -119,7 +206,8 @@
       border-radius: 10px;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      will-change: transform;
     }
 
     .primary {
@@ -130,6 +218,7 @@
 
     .primary:hover {
       background: var(--btn-primary-hover);
+      transform: translateY(-1px);
     }
 
     .secondary {
@@ -141,6 +230,7 @@
     .secondary:hover {
       background: var(--btn-secondary-hover);
       border-color: rgba(58, 110, 165, 0.30);
+      transform: translateY(-1px);
     }
 
     .metrics {
@@ -158,6 +248,7 @@
       margin: 0;
       font-size: 1.8rem;
       color: var(--brand-blue);
+      letter-spacing: -0.01em;
     }
 
     .card-like {
@@ -182,7 +273,7 @@
       text-align: left;
     }
 
-    /* Skills layout: clean, intentional grid */
+    /* Skills layout */
     .skills-grid {
       display: grid;
       gap: 16px;
@@ -190,15 +281,11 @@
     }
 
     @media (min-width: 700px) {
-      .skills-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (min-width: 980px) {
-      .skills-grid.six {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
+      .skills-grid.six { grid-template-columns: 1fr 1fr 1fr; }
     }
 
     .skill-card {
@@ -208,11 +295,12 @@
       border-radius: 12px;
       padding: 16px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .skill-card:hover {
       border-color: rgba(58, 110, 165, 0.28);
+      transform: translateY(-1px);
     }
 
     .skill-card h3 {
@@ -224,11 +312,10 @@
     .skill-card p {
       margin: 0;
       color: var(--text-muted);
-      max-width: none;
       line-height: 1.5;
     }
 
-    /* --- Sticky Nav (moved out of inline styles) --- */
+    /* Sticky Nav */
     .sticky-nav {
       position: sticky;
       top: 0;
@@ -236,6 +323,7 @@
       background: rgba(11, 18, 32, 0.78);
       border-bottom: 1px solid rgba(148, 163, 184, 0.15);
       z-index: 10;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .sticky-nav-inner {
@@ -244,6 +332,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 14px;
+      transition: padding 0.2s ease;
     }
 
     .nav-title {
@@ -270,11 +359,18 @@
       color: var(--link-hover);
     }
 
-    /* --- MNTN-inspired patterns (adapted) --- */
-
-    .hero {
-      padding: 34px 0 10px;
+    /* Nav shrink on scroll */
+    .sticky-nav.nav--scrolled {
+      background: rgba(11, 18, 32, 0.88);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
     }
+
+    .sticky-nav.nav--scrolled .sticky-nav-inner {
+      padding: 10px 0;
+    }
+
+    /* Hero */
+    .hero { padding: 34px 0 10px; }
 
     .kicker {
       display: inline-block;
@@ -293,9 +389,7 @@
       max-width: 700px;
     }
 
-    .hero-actions {
-      margin-top: 18px;
-    }
+    .hero-actions { margin-top: 18px; }
 
     /* Social proof strip */
     .logo-strip {
@@ -319,9 +413,7 @@
     }
 
     @media (min-width: 700px) {
-      .logos {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-      }
+      .logos { grid-template-columns: repeat(6, minmax(0, 1fr)); }
     }
 
     .logo-pill {
@@ -354,9 +446,7 @@
     }
 
     @media (min-width: 820px) {
-      .steps {
-        grid-template-columns: 1fr 1fr;
-      }
+      .steps { grid-template-columns: 1fr 1fr; }
     }
 
     .step-card {
@@ -364,11 +454,12 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 16px;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .step-card:hover {
       border-color: rgba(58, 110, 165, 0.28);
+      transform: translateY(-1px);
     }
 
     .step-head {
@@ -420,7 +511,7 @@
       line-height: 1.7;
     }
 
-    /* Footer (moved out of inline styles) */
+    /* Footer */
     .site-footer {
       margin-top: 38px;
       padding: 18px 0;
@@ -435,7 +526,7 @@
   <div class="page">
 
     <!-- Sticky Nav -->
-    <div class="sticky-nav">
+    <div class="sticky-nav" id="stickyNav">
       <div class="sticky-nav-inner">
         <div class="nav-title">Avery Rine</div>
         <div class="nav-links">
@@ -450,27 +541,27 @@
 
       <!-- Hero -->
       <div class="hero">
-        <span class="kicker">Engineering Leadership · Quality · Release Governance</span>
+        <span class="kicker" data-aos="fade-up" data-aos-duration="650">Engineering Leadership · Quality · Release Governance</span>
 
-        <h1>Avery Rine</h1>
-        <h2>Engineering Manager</h2>
+        <h1 data-aos="fade-up" data-aos-delay="70" data-aos-duration="650">Avery Rine</h1>
+        <h2 data-aos="fade-up" data-aos-delay="120" data-aos-duration="650">Engineering Manager</h2>
 
-        <p class="t-muted tight">
+        <p class="t-muted tight" data-aos="fade-up" data-aos-delay="160" data-aos-duration="650">
           Indianapolis, IN · Open to remote/hybrid · Available for interviews
         </p>
 
-        <p class="hero-subtitle">
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="210" data-aos-duration="650">
           I build calm, high-performing teams and strengthen SDLC signals to ship SOX-compliant releases faster —
           up to 70% cycle-time reduction with 90%+ automation stability.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-actions" data-aos="fade-up" data-aos-delay="260" data-aos-duration="650">
           <a href="/resume.pdf" class="primary">Download Resume</a>
           <a href="mailto:averyrine37@gmail.com" class="secondary">Email me</a>
         </div>
 
         <!-- Social proof strip -->
-        <div class="logo-strip">
+        <div class="logo-strip" data-aos="fade-up" data-aos-delay="120" data-aos-duration="650">
           <p class="logo-strip-title">Trusted for calm leadership in regulated, high-signal delivery environments</p>
           <div class="logos">
             <div class="logo-pill">SOX Releases</div>
@@ -483,14 +574,14 @@
         </div>
 
         <!-- Stats band -->
-        <div class="stats-band">
+        <div class="stats-band" data-aos="fade-up" data-aos-duration="650">
           <div class="metrics" style="margin-top:0;">
             <div class="metric">
-              <h3>70%</h3>
+              <h3><span class="count" data-target="70" data-suffix="%">70%</span></h3>
               <p class="t-muted">Release timelines reduced</p>
             </div>
             <div class="metric">
-              <h3>90%+</h3>
+              <h3><span class="count" data-target="90" data-suffix="%+">90%+</span></h3>
               <p class="t-muted">Automation stability achieved</p>
             </div>
             <div class="metric">
@@ -498,7 +589,7 @@
               <p class="t-muted">Compliant release governance</p>
             </div>
             <div class="metric">
-              <h3>9+</h3>
+              <h3><span class="count" data-target="9" data-suffix="+">9+</span></h3>
               <p class="t-muted">Years engineering leadership</p>
             </div>
           </div>
@@ -506,36 +597,36 @@
       </div>
 
       <!-- Core Skills -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <h2 class="t-center">Core Skills</h2>
 
         <div class="skills-grid six">
-          <div class="skill-card">
+          <div class="skill-card" data-aos="fade-up" data-aos-delay="0" data-aos-duration="650">
             <h3>Leadership &amp; Strategy</h3>
             <p>Team Leadership, Agile Delivery, Release Governance, Stakeholder Alignment</p>
           </div>
 
-          <div class="skill-card">
+          <div class="skill-card" data-aos="fade-up" data-aos-delay="40" data-aos-duration="650">
             <h3>Automation &amp; Quality</h3>
             <p>Test Automation, QA Strategy, CI/CD Integration, Regression Optimization</p>
           </div>
 
-          <div class="skill-card">
+          <div class="skill-card" data-aos="fade-up" data-aos-delay="80" data-aos-duration="650">
             <h3>Tools &amp; Platforms</h3>
             <p>Azure DevOps, Jenkins, GitHub, Postman, Selenium</p>
           </div>
 
-          <div class="skill-card">
+          <div class="skill-card" data-aos="fade-up" data-aos-delay="120" data-aos-duration="650">
             <h3>Data &amp; Reporting</h3>
             <p>SQL, Power BI, Metrics &amp; Reporting, Quality Dashboards</p>
           </div>
 
-          <div class="skill-card">
+          <div class="skill-card" data-aos="fade-up" data-aos-delay="160" data-aos-duration="650">
             <h3>AI &amp; Process Improvement</h3>
             <p>AI-assisted workflows, Process Optimization, SDLC Efficiency</p>
           </div>
 
-          <div class="skill-card">
+          <div class="skill-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="650">
             <h3>Risk &amp; Compliance</h3>
             <p>SOX release governance, change management, audit-ready delivery</p>
           </div>
@@ -543,11 +634,11 @@
       </div>
 
       <!-- How I work -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <h2 class="t-center">How I work</h2>
 
         <div class="steps">
-          <div class="step-card">
+          <div class="step-card" data-aos="fade-up" data-aos-delay="0" data-aos-duration="650">
             <div class="step-head">
               <span class="step-num">1</span>
               <h3 class="step-title">Clarify the outcome</h3>
@@ -557,7 +648,7 @@
             </p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card" data-aos="fade-up" data-aos-delay="60" data-aos-duration="650">
             <div class="step-head">
               <span class="step-num">2</span>
               <h3 class="step-title">Strengthen SDLC signals</h3>
@@ -567,7 +658,7 @@
             </p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card" data-aos="fade-up" data-aos-delay="120" data-aos-duration="650">
             <div class="step-head">
               <span class="step-num">3</span>
               <h3 class="step-title">Ship with governance</h3>
@@ -577,7 +668,7 @@
             </p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card" data-aos="fade-up" data-aos-delay="180" data-aos-duration="650">
             <div class="step-head">
               <span class="step-num">4</span>
               <h3 class="step-title">Operate and improve</h3>
@@ -590,7 +681,7 @@
       </div>
 
       <!-- What I'm known for -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <h2 class="t-center">What I’m known for</h2>
 
         <div class="prose">
@@ -611,10 +702,10 @@
       </div>
 
       <!-- Featured Impact -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <h2 class="t-center">Featured Impact</h2>
 
-        <div class="card-like" style="margin-top:24px;">
+        <div class="card-like" style="margin-top:24px;" data-aos="fade-up" data-aos-duration="650">
           <h3 class="mt0 t-text">AI-Powered PR Agent Implementation</h3>
 
           <div class="prose">
@@ -637,7 +728,7 @@
       </div>
 
       <!-- CTA band -->
-      <div class="cta-band">
+      <div class="cta-band" data-aos="fade-up" data-aos-duration="650">
         <h2 class="mt0">Want the full story?</h2>
         <p>
           Download my resume or email me. I’m happy to share examples, metrics, and what I’m looking for next.
@@ -647,11 +738,11 @@
       </div>
 
       <!-- Experience -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <h2 class="t-center">Experience</h2>
 
         <div style="display:flex; flex-direction:column; gap:18px; margin-top:28px;">
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-duration="650">
             <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
               <div style="font-weight:700; font-size:1.05rem;" class="t-text">Engineering Manager — EverBright</div>
               <div class="t-muted">Mar 2023 – Present</div>
@@ -666,7 +757,7 @@
             </div>
           </div>
 
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-delay="40" data-aos-duration="650">
             <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
               <div style="font-weight:700; font-size:1.05rem;" class="t-text">QA Engineering Manager &amp; Release Management — Bill360</div>
               <div class="t-muted">Apr 2022 – Mar 2023</div>
@@ -679,7 +770,7 @@
             </div>
           </div>
 
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-delay="80" data-aos-duration="650">
             <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
               <div style="font-weight:700; font-size:1.05rem;" class="t-text">Lead Automation Architect / Sr. Software QA Engineer — RCI &amp; Wyndham Destinations</div>
               <div class="t-muted">Sep 2019 – Apr 2022</div>
@@ -700,11 +791,11 @@
       </div>
 
       <!-- Recommendations -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <h2 class="t-center">What others say</h2>
 
         <div style="display:flex; flex-direction:column; gap:18px; margin-top:28px;">
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-duration="650">
             <div class="prose">
               <p class="t-text">
                 “Avery’s leadership increased velocity, quality, and team morale. Stakeholders saw features shipped earlier with fewer issues,
@@ -714,7 +805,7 @@
             <p class="t-muted" style="margin-top:10px;">— Head of AI Research &amp; Applications</p>
           </div>
 
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-delay="40" data-aos-duration="650">
             <div class="prose">
               <p class="t-text">
                 “Avery is an exceptional engineering manager — a forward thinker who solves problems quickly and creates an environment where her team can truly thrive.”
@@ -723,7 +814,7 @@
             <p class="t-muted" style="margin-top:10px;">— Software Engineer</p>
           </div>
 
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-delay="80" data-aos-duration="650">
             <div class="prose">
               <p class="t-text">
                 “She brought stability to our release cycles, reduced downtime, and improved delivery predictability across the organization.
@@ -733,7 +824,7 @@
             <p class="t-muted" style="margin-top:10px;">— CTO</p>
           </div>
 
-          <div class="card-like">
+          <div class="card-like" data-aos="fade-up" data-aos-delay="120" data-aos-duration="650">
             <div class="prose">
               <p class="t-text">
                 “Avery creates a culture of trust, ownership, and continuous improvement. She balances technical depth with strategic thinking
@@ -746,7 +837,7 @@
       </div>
 
       <!-- Contact -->
-      <div class="section">
+      <div class="section" data-aos="fade-up" data-aos-duration="650">
         <div class="card-like">
           <h2 class="t-center" style="margin:0 0 12px;">Contact</h2>
 
@@ -776,6 +867,70 @@
     </div> <!-- /container -->
 
   </div> <!-- /page -->
+
+  <!-- AOS (Animate on Scroll) -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // Respect reduced motion
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Init scroll animations
+    AOS.init({
+      duration: prefersReducedMotion ? 0 : 650,
+      easing: 'ease-out',
+      once: true,
+      offset: 80
+    });
+
+    // Nav shrink on scroll
+    const stickyNav = document.getElementById('stickyNav');
+    const onScroll = () => {
+      if (!stickyNav) return;
+      stickyNav.classList.toggle('nav--scrolled', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Count-up metrics (calm, one-time)
+    const countEls = document.querySelectorAll('.count');
+
+    const animateCount = (el) => {
+      const target = Number(el.getAttribute('data-target') || '0');
+      const suffix = el.getAttribute('data-suffix') || '';
+      if (!target || prefersReducedMotion) {
+        el.textContent = `${target}${suffix}`;
+        return;
+      }
+
+      const durationMs = 900; // calm & quick
+      const start = performance.now();
+      const startVal = 0;
+
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / durationMs);
+        // smooth easing
+        const eased = 1 - Math.pow(1 - t, 3);
+        const current = Math.round(startVal + (target - startVal) * eased);
+        el.textContent = `${current}${suffix}`;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    countEls.forEach(el => io.observe(el));
+  </script>
+
 </body>
 
 </html>
